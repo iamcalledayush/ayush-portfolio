@@ -769,10 +769,7 @@ a:hover {
 .forensic-analysis { margin-top:1rem; padding-top:0.8rem; border-top:1px dashed #ccc; }
 .forensic-analysis p { font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:#555; }
 
-@media(max-width:700px) {
-    .corkboard { grid-template-columns:1fr; padding:1.5rem 1rem; }
-    .inner-corkboard { grid-template-columns:1fr; padding:1rem 0.8rem; }
-}
+/* corkboard single-col handled in responsive section below */
 
 /* --- TRAINING DOSSIER --- */
 .dossier-question {
@@ -1286,43 +1283,173 @@ a:hover {
 }
 
 /* --- RESPONSIVE --- */
-@media (max-width: 900px) {
+
+/* === 1024px and below (iPad landscape, small laptops) === */
+@media (max-width: 1024px) {
+    .mugshot-container {
+        grid-template-columns: 300px 1fr;
+        gap: 2rem;
+    }
+
+    .subject-form::before {
+        font-size: 4rem;
+    }
+}
+
+/* === 768px and below (tablet portrait) === */
+@media (max-width: 768px) {
     .mugshot-container {
         grid-template-columns: 1fr;
     }
 
     .mugshot-left {
-        max-width: 350px;
+        max-width: 320px;
+        margin: 0 auto;
+    }
+
+    .mugshot-frame {
+        max-width: 320px;
         margin: 0 auto;
     }
 
     .corkboard {
         grid-template-columns: repeat(2, 1fr);
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
+    }
+
+    .section {
+        padding: 3rem 1.5rem;
     }
 
     .stamp-header {
         font-size: 1.8rem;
+        letter-spacing: 3px;
+    }
+
+    .classified-stamp,
+    .top-secret-stamp {
+        font-size: 1.3rem;
+        padding: 0.2rem 0.8rem;
+    }
+
+    .subject-form {
+        padding: 1.5rem;
+    }
+
+    .subject-form::before {
+        font-size: 3.5rem;
+    }
+
+    .dossier-entry {
+        padding: 1.5rem 1.8rem;
+    }
+
+    .dossier-seal {
+        width: 45px;
+        height: 45px;
+    }
+
+    .dossier-seal::before {
+        width: 30px;
+        height: 30px;
+    }
+
+    .operation-file {
+        padding: 2rem;
+    }
+
+    .weapon-category {
+        padding: 1.2rem 1.5rem;
+    }
+
+    .wanted-border {
+        padding: 2.5rem 2rem;
+    }
+
+    .wanted-title {
+        font-size: 2.8rem;
+        letter-spacing: 10px;
+    }
+
+    .inner-corkboard {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     }
 }
 
+/* === 600px and below (large phones, small tablets) === */
 @media (max-width: 600px) {
     .section {
         padding: 2.5rem 1rem;
     }
 
-    .corkboard {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
     .section-header {
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
+        gap: 0.8rem;
     }
 
     .stamp-header {
-        font-size: 1.4rem;
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+    }
+
+    .classified-stamp,
+    .top-secret-stamp {
+        font-size: 1.1rem;
+        padding: 0.2rem 0.6rem;
+        letter-spacing: 2px;
+        border-width: 3px;
+    }
+
+    .corkboard {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem 1rem;
+        border-width: 5px;
+    }
+
+    .inner-corkboard {
+        grid-template-columns: 1fr;
+        padding: 1rem 0.8rem;
+        gap: 1rem;
+        border-width: 3px;
+    }
+
+    .mugshot-left {
+        max-width: 280px;
+    }
+
+    .mugshot-frame {
+        max-width: 280px;
+    }
+
+    .subject-form {
+        padding: 1.2rem;
+    }
+
+    .subject-form::before {
+        font-size: 2.5rem;
+        letter-spacing: 5px;
+    }
+
+    .form-title {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .form-label {
+        min-width: unset;
+        font-size: 0.75rem;
+    }
+
+    .form-value {
+        font-size: 0.9rem;
     }
 
     .case-title {
@@ -1335,26 +1462,663 @@ a:hover {
         gap: 0.5rem;
     }
 
+    .exp-front {
+        padding: 1.4rem 1.2rem;
+    }
+
+    .exp-board-expanded {
+        padding: 1.4rem 1.2rem;
+    }
+
+    .close-card {
+        padding: 8px 20px;
+        font-size: 0.8rem;
+    }
+
     .wanted-border {
         padding: 2rem 1.5rem;
+        border-width: 5px;
+        outline-offset: -8px;
     }
 
     .wanted-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         letter-spacing: 8px;
     }
 
-    .form-row {
-        flex-direction: column;
-        gap: 0.2rem;
+    .wanted-name {
+        font-size: 1.6rem;
+        letter-spacing: 3px;
     }
 
-    .form-label {
-        min-width: unset;
+    .tip-icons {
+        gap: 1rem;
+    }
+
+    .tip-icon-btn {
+        width: 48px;
+        height: 48px;
+        font-size: 1rem;
+    }
+
+    .dossier-entry {
+        padding: 1.5rem;
+    }
+
+    .dossier-institution {
+        font-size: 1.2rem;
+    }
+
+    .dossier-seal {
+        width: 40px;
+        height: 40px;
+        top: 15px;
+        right: 15px;
+    }
+
+    .dossier-seal::before {
+        width: 25px;
+        height: 25px;
+    }
+
+    .operation-file {
+        padding: 1.5rem;
+    }
+
+    .operation-name {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+    }
+
+    .weapon-category {
+        padding: 1rem 1.2rem;
+    }
+
+    .loading-text {
+        font-size: 1.1rem;
+    }
+
+    .ending-text {
+        font-size: 1.1rem;
+    }
+
+    .comm-channels {
+        gap: 0.5rem;
+    }
+
+    .channel-link {
+        font-size: 0.8rem;
+        padding: 0.5rem 0.6rem;
+        gap: 0.6rem;
+    }
+
+    .projects-board {
+        grid-template-columns: 1fr;
+    }
+
+    .project-links {
+        flex-wrap: wrap;
+    }
+
+    .evidence-tags {
+        gap: 0.4rem;
+    }
+
+    .evidence-tag {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.8rem;
     }
 
     .classified-watermark {
         font-size: 3rem;
+    }
+}
+
+/* === 480px and below (phones) === */
+@media (max-width: 480px) {
+    body {
+        font-size: 0.95rem;
+        line-height: 1.55;
+    }
+
+    .section {
+        padding: 2rem 0.8rem;
+    }
+
+    .section-header {
+        gap: 0.6rem;
+        margin-bottom: 1.8rem;
+    }
+
+    .stamp-header {
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+        padding-bottom: 0.4rem;
+        border-bottom-width: 2px;
+    }
+
+    .classified-stamp,
+    .top-secret-stamp {
+        font-size: 0.9rem;
+        padding: 0.15rem 0.5rem;
+        letter-spacing: 1.5px;
+        border-width: 2px;
+    }
+
+    /* Mugshot */
+    .mugshot-left {
+        max-width: 240px;
+    }
+
+    .mugshot-frame {
+        max-width: 240px;
+        padding: 0.8rem 1rem 0;
+    }
+
+    .mugshot-label {
+        font-size: 0.8rem;
+        padding: 0.6rem;
+        letter-spacing: 1px;
+    }
+
+    .height-markers {
+        font-size: 0.6rem;
+        right: 6px;
+    }
+
+    .height-markers span::before {
+        right: 22px;
+        width: 25px;
+    }
+
+    .mugshot-stamp {
+        font-size: 0.85rem;
+        padding: 1px 6px;
+        letter-spacing: 2px;
+    }
+
+    /* Subject form */
+    .subject-form {
+        padding: 1rem;
+    }
+
+    .subject-form::before {
+        font-size: 2rem;
+        letter-spacing: 3px;
+    }
+
+    .form-title {
+        font-size: 1rem;
+        letter-spacing: 1.5px;
+    }
+
+    .form-row {
+        font-size: 0.85rem;
+        padding: 0.4rem 0;
+    }
+
+    .form-label {
+        font-size: 0.7rem;
+    }
+
+    .form-value {
+        font-size: 0.85rem;
+    }
+
+    .threat-extreme {
+        font-size: 0.95rem;
+    }
+
+    .form-subtitle {
+        font-size: 0.8rem;
+        letter-spacing: 1.5px;
+    }
+
+    /* Communication channels */
+    .channel-link {
+        font-size: 0.78rem;
+        padding: 0.5rem;
+        gap: 0.5rem;
+        min-height: 44px;
+    }
+
+    .channel-icon {
+        font-size: 0.9rem;
+        width: 20px;
+    }
+
+    .monitored-badge {
+        font-size: 0.55rem;
+        padding: 1px 4px;
+    }
+
+    /* Corkboard */
+    .corkboard {
+        padding: 1.2rem 0.8rem;
+        gap: 1.2rem;
+        border-width: 4px;
+    }
+
+    .board-hint {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Exp cards */
+    .exp-front {
+        padding: 1.2rem 1rem;
+    }
+
+    .exp-front h3 {
+        font-size: 1.05rem;
+        letter-spacing: 1.5px;
+    }
+
+    .card-meta-line {
+        font-size: 0.75rem;
+    }
+
+    .exp-board-expanded {
+        padding: 1.2rem 1rem;
+    }
+
+    .exp-expanded-header .case-title {
+        font-size: 1.2rem;
+        letter-spacing: 1.5px;
+    }
+
+    .exp-expanded-header .case-meta {
+        font-size: 0.78rem;
+        gap: 0.3rem 1rem;
+    }
+
+    /* Inner corkboard */
+    .inner-corkboard {
+        padding: 0.8rem 0.6rem;
+        gap: 0.8rem;
+        margin: 1rem 0;
+    }
+
+    .impact-card {
+        padding: 1rem 0.8rem 0.8rem;
+    }
+
+    .impact-card h4 {
+        font-size: 0.8rem;
+    }
+
+    .impact-card p,
+    .impact-detail {
+        font-size: 0.75rem;
+    }
+
+    .close-card {
+        padding: 10px 24px;
+        font-size: 0.8rem;
+        min-height: 44px;
+    }
+
+    .crime-quote {
+        font-size: 0.85rem;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .evidence-item {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    .exhibit-tag {
+        font-size: 0.6rem;
+    }
+
+    /* Training dossier */
+    .dossier-question {
+        font-size: 0.95rem;
+    }
+
+    .dossier-entries {
+        gap: 1.5rem;
+    }
+
+    .dossier-entry {
+        padding: 1.2rem;
+    }
+
+    .dossier-classification {
+        font-size: 0.65rem;
+        letter-spacing: 2px;
+    }
+
+    .dossier-institution {
+        font-size: 1.1rem;
+        letter-spacing: 1.5px;
+    }
+
+    .dossier-detail {
+        font-size: 0.85rem;
+    }
+
+    .dossier-note {
+        font-size: 0.85rem;
+        padding-left: 0.8rem;
+    }
+
+    .dossier-courses {
+        font-size: 0.75rem;
+    }
+
+    .dossier-seal {
+        width: 35px;
+        height: 35px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .dossier-seal::before {
+        width: 22px;
+        height: 22px;
+    }
+
+    /* Weapons inventory */
+    .inventory-subtitle,
+    .projects-title {
+        font-size: 0.95rem;
+    }
+
+    .category-label {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+    }
+
+    .evidence-tag {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .weapon-category {
+        padding: 1rem;
+    }
+
+    /* Projects */
+    .project-stack {
+        font-size: 0.72rem;
+    }
+
+    .project-desc {
+        font-size: 0.85rem;
+    }
+
+    .project-link-btn {
+        font-size: 0.7rem;
+        padding: 6px 12px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    /* Operations */
+    .operation-file {
+        padding: 1.2rem;
+    }
+
+    .operation-name {
+        font-size: 1.1rem;
+        letter-spacing: 1.5px;
+    }
+
+    /* Wanted poster */
+    .wanted-border {
+        padding: 1.5rem 1rem;
+        border-width: 4px;
+        outline-offset: -7px;
+        outline-width: 2px;
+    }
+
+    .wanted-title {
+        font-size: 1.8rem;
+        letter-spacing: 6px;
+        margin-bottom: 0.6rem;
+    }
+
+    .wanted-name {
+        font-size: 1.3rem;
+        letter-spacing: 3px;
+    }
+
+    .wanted-alias {
+        font-size: 0.95rem;
+    }
+
+    .wanted-description {
+        font-size: 0.78rem;
+    }
+
+    .tip-intro {
+        font-size: 0.85rem;
+    }
+
+    .tip-icons {
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .tip-icon-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 0.95rem;
+    }
+
+    .silhouette-head.small {
+        width: 40px;
+        height: 44px;
+    }
+
+    .silhouette-body.small {
+        width: 64px;
+        height: 40px;
+    }
+
+    /* Loading screen */
+    .loading-text {
+        font-size: 1rem;
+    }
+
+    .clearance-text {
+        font-size: 0.75rem;
+        letter-spacing: 3px;
+    }
+
+    .loading-content {
+        padding: 1.5rem;
+    }
+
+    /* Footer & ending */
+    .ending-text {
+        font-size: 1rem;
+        letter-spacing: 1px;
+    }
+
+    .case-ending {
+        padding: 2rem 0 1rem;
+    }
+
+    .footer {
+        padding: 1.5rem 1rem;
+    }
+
+    .footer p:first-child {
+        letter-spacing: 2px;
+        font-size: 0.75rem;
+    }
+
+    .footer-small {
+        font-size: 0.65rem;
+    }
+
+    /* Caution tape */
+    .caution-tape-text {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+    }
+
+    /* Case status */
+    .case-status {
+        font-size: 0.65rem;
+        padding: 0.15rem 0.6rem;
+    }
+}
+
+/* === 375px and below (iPhone SE, very small screens) === */
+@media (max-width: 375px) {
+    .section {
+        padding: 1.5rem 0.6rem;
+    }
+
+    .stamp-header {
+        font-size: 1.05rem;
+        letter-spacing: 1.5px;
+    }
+
+    .classified-stamp,
+    .top-secret-stamp {
+        font-size: 0.8rem;
+        padding: 0.1rem 0.4rem;
+    }
+
+    .mugshot-left {
+        max-width: 210px;
+    }
+
+    .mugshot-frame {
+        max-width: 210px;
+    }
+
+    .subject-form::before {
+        font-size: 1.6rem;
+    }
+
+    .form-title {
+        font-size: 0.9rem;
+    }
+
+    .corkboard {
+        padding: 1rem 0.6rem;
+        border-width: 3px;
+    }
+
+    .exp-front h3 {
+        font-size: 0.95rem;
+    }
+
+    .exp-expanded-header .case-title {
+        font-size: 1.05rem;
+    }
+
+    .wanted-title {
+        font-size: 1.5rem;
+        letter-spacing: 4px;
+    }
+
+    .wanted-name {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+    }
+
+    .wanted-border {
+        padding: 1.2rem 0.8rem;
+    }
+
+    .dossier-institution {
+        font-size: 1rem;
+    }
+
+    .operation-name {
+        font-size: 1rem;
+    }
+
+    .loading-text {
+        font-size: 0.9rem;
+    }
+}
+
+/* === Ensure no horizontal overflow at any size === */
+@media (max-width: 768px) {
+    .caution-tape,
+    .caution-tape-top {
+        overflow: hidden;
+    }
+
+    /* Prevent any element from causing horizontal scroll */
+    .section,
+    .mugshot-container,
+    .subject-form,
+    .corkboard,
+    .wanted-poster,
+    .wanted-border,
+    .operation-file,
+    .dossier-entry,
+    .weapon-category {
+        max-width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+    }
+
+    /* Ensure evidence tags and project links wrap */
+    .evidence-tags {
+        max-width: 100%;
+    }
+
+    .project-links {
+        max-width: 100%;
+    }
+
+    .channel-link {
+        overflow-wrap: break-word;
+        word-break: break-word;
+    }
+}
+
+/* === Touch target minimum sizes === */
+@media (hover: none) and (pointer: coarse) {
+    .channel-link {
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+
+    .exp-card {
+        min-height: 44px;
+    }
+
+    .impact-card {
+        min-height: 44px;
+    }
+
+    .project-link-btn {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .close-card {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 20px;
+        font-size: 0.85rem;
+    }
+
+    .tip-icon-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .evidence-tag a {
+        display: inline-block;
+        min-height: 44px;
+        line-height: 44px;
     }
 }
 
