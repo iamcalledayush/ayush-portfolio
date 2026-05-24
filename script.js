@@ -130,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
         initParallaxElements();
         initFlickerEffect();
         initDossierRedactions();
+        initMobileFeatures();
     }
 
     // --- SCROLL REVEAL ---
@@ -328,5 +329,187 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- (redaction removed) ---
     function initDossierRedactions() {}
+
+    // --- MOBILE IMPROVEMENTS ---
+    function initMobileFeatures() {
+        const isMobile = window.matchMedia('(max-width: 810px)');
+        if (!isMobile.matches) return;
+
+        // 1. Sticky mini-header
+        initMiniHeader();
+
+        // 2. Corkboard carousels
+        initCorkboardCarousels();
+
+        // 7. Scroll-to-top button
+        initScrollToTop();
+    }
+
+    // 1. Mini-header that appears after scrolling past profile
+    function initMiniHeader() {
+        const miniHeader = document.createElement('div');
+        miniHeader.className = 'mobile-mini-header';
+        miniHeader.innerHTML = `
+            <img src="mugshot.jpg" alt="Ayush Sharma" class="mini-mugshot">
+            <div>
+                <div class="mini-name">Ayush Sharma</div>
+                <div class="mini-role">AI Engineer</div>
+            </div>
+        `;
+        const nav = document.getElementById('nav-bar');
+        nav.parentNode.insertBefore(miniHeader, nav.nextSibling);
+
+        const profileSection = document.getElementById('suspect-profile');
+        if (!profileSection) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    miniHeader.classList.remove('visible');
+                } else {
+                    // Only show when scrolled below the profile
+                    if (window.scrollY > profileSection.offsetTop + profileSection.offsetHeight / 2) {
+                        miniHeader.classList.add('visible');
+                    } else {
+                        miniHeader.classList.remove('visible');
+                    }
+                }
+            });
+        }, { threshold: 0, rootMargin: '-44px 0px 0px 0px' });
+
+        observer.observe(profileSection);
+    }
+
+    // 2 & 3. Carousel setup for corkboards
+    function initCorkboardCarousels() {
+        // Main corkboards (experience + projects)
+        document.querySelectorAll('.corkboard').forEach(corkboard => {
+            setupCarousel(corkboard, '.exp-card', 'carousel-wrapper', 'carousel-dots');
+        });
+
+        // Inner corkboards (impact cards inside expanded experience)
+        // These need to be set up when cards open, so we use a MutationObserver
+        const expCards = document.querySelectorAll('.exp-card');
+        expCards.forEach(card => {
+            const innerCorkboard = card.querySelector('.inner-corkboard');
+            if (!innerCorkboard) return;
+
+            // Set up inner carousel when card is opened
+            const mutObs = new MutationObserver(() => {
+                if (card.classList.contains('open')) {
+                    // Small delay to let the expanded content render
+                    setTimeout(() => {
+                        if (!innerCorkboard.classList.contains('mobile-carousel-inner')) {
+                            setupInnerCarousel(innerCorkboard);
+                        }
+                    }, 100);
+                }
+            });
+            mutObs.observe(card, { attributes: true, attributeFilter: ['class'] });
+        });
+    }
+
+    function setupCarousel(corkboard, cardSelector, wrapperClass, dotsClass) {
+        const cards = Array.from(corkboard.querySelectorAll(':scope > ' + cardSelector));
+        if (cards.length <= 1) return;
+
+        corkboard.classList.add('mobile-carousel');
+
+        // Create wrapper
+        const wrapper = document.createElement('div');
+        wrapper.className = wrapperClass;
+
+        // Move cards into wrapper
+        cards.forEach(card => {
+            wrapper.appendChild(card);
+        });
+
+        // Create dots
+        const dotsContainer = document.createElement('div');
+        dotsContainer.className = dotsClass;
+        cards.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Go to card ' + (i + 1));
+            dot.addEventListener('click', () => {
+                const cardWidth = wrapper.children[0].offsetWidth + 12; // gap
+                wrapper.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        corkboard.appendChild(wrapper);
+        corkboard.appendChild(dotsContainer);
+
+        // Update dots on scroll
+        wrapper.addEventListener('scroll', () => {
+            const scrollLeft = wrapper.scrollLeft;
+            const cardWidth = wrapper.children[0].offsetWidth + 12;
+            const activeIndex = Math.round(scrollLeft / cardWidth);
+            dotsContainer.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === activeIndex);
+            });
+        });
+    }
+
+    function setupInnerCarousel(innerCorkboard) {
+        const cards = Array.from(innerCorkboard.querySelectorAll(':scope > .impact-card'));
+        if (cards.length <= 1) return;
+
+        innerCorkboard.classList.add('mobile-carousel-inner');
+
+        const wrapper = document.createElement('div');
+        wrapper.className = 'inner-carousel-wrapper';
+
+        cards.forEach(card => {
+            wrapper.appendChild(card);
+        });
+
+        const dotsContainer = document.createElement('div');
+        dotsContainer.className = 'inner-carousel-dots';
+        cards.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Go to impact ' + (i + 1));
+            dot.addEventListener('click', () => {
+                const cardWidth = wrapper.children[0].offsetWidth + 10;
+                wrapper.scrollTo({ left: i * cardWidth, behavior: 'smooth' });
+            });
+            dotsContainer.appendChild(dot);
+        });
+
+        innerCorkboard.appendChild(wrapper);
+        innerCorkboard.appendChild(dotsContainer);
+
+        wrapper.addEventListener('scroll', () => {
+            const scrollLeft = wrapper.scrollLeft;
+            const cardWidth = wrapper.children[0].offsetWidth + 10;
+            const activeIndex = Math.round(scrollLeft / cardWidth);
+            dotsContainer.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === activeIndex);
+            });
+        });
+    }
+
+    // 7. Scroll-to-top floating button
+    function initScrollToTop() {
+        const btn = document.createElement('button');
+        btn.className = 'scroll-top-btn';
+        btn.innerHTML = '&#8593;';
+        btn.setAttribute('aria-label', 'Scroll to top');
+        document.body.appendChild(btn);
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        });
+
+        btn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
 });

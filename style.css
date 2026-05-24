@@ -2163,6 +2163,260 @@ a:hover {
     }
 }
 
+/* === MOBILE IMPROVEMENTS (810px and below) === */
+@media (max-width: 810px) {
+    /* 1. Sticky mini-header */
+    .mobile-mini-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 16px;
+        background: rgba(10, 10, 10, 0.92);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(245, 197, 24, 0.3);
+        opacity: 0;
+        transform: translateY(-100%);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        pointer-events: none;
+    }
+    .mobile-mini-header.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+    .mobile-mini-header .mini-mugshot {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1.5px solid #f5c518;
+        flex-shrink: 0;
+        filter: grayscale(0.5);
+    }
+    .mobile-mini-header .mini-name {
+        font-family: 'Oswald', sans-serif;
+        font-size: 0.8rem;
+        color: #f5c518;
+        letter-spacing: 1.5px;
+        font-weight: 700;
+    }
+    .mobile-mini-header .mini-role {
+        font-family: 'IBM Plex Mono', monospace;
+        font-size: 0.6rem;
+        color: #888;
+        letter-spacing: 1px;
+    }
+
+    /* 2. Carousel wrapper for corkboard cards */
+    .corkboard.mobile-carousel {
+        display: block;
+        padding: 1.5rem 0.5rem;
+        overflow: visible;
+    }
+    .carousel-wrapper {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 12px;
+        padding: 12px 4px 20px;
+        scrollbar-width: none;
+    }
+    .carousel-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+    .carousel-wrapper > .exp-card {
+        scroll-snap-align: center;
+        min-width: 85vw;
+        max-width: 85vw;
+        flex-shrink: 0;
+        transform: none !important;
+    }
+    .carousel-wrapper > .exp-card.open {
+        min-width: 85vw;
+        max-width: 85vw;
+    }
+    .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        padding: 8px 0 4px;
+    }
+    .carousel-dots .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #555;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s;
+    }
+    .carousel-dots .dot.active {
+        background: #f5c518;
+        transform: scale(1.25);
+    }
+
+    /* 3. Inner corkboard impact carousel */
+    .inner-corkboard.mobile-carousel-inner {
+        display: block;
+        padding: 1rem 0.5rem;
+        overflow: visible;
+    }
+    .inner-carousel-wrapper {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 10px;
+        padding: 10px 2px 16px;
+        scrollbar-width: none;
+    }
+    .inner-carousel-wrapper::-webkit-scrollbar {
+        display: none;
+    }
+    .inner-carousel-wrapper > .impact-card {
+        scroll-snap-align: center;
+        min-width: 80vw;
+        max-width: 80vw;
+        flex-shrink: 0;
+        transform: none !important;
+    }
+    .inner-carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        padding: 4px 0;
+    }
+    .inner-carousel-dots .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #555;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s;
+    }
+    .inner-carousel-dots .dot.active {
+        background: #f5c518;
+        transform: scale(1.25);
+    }
+
+    /* 4. Caution tapes - thinner on mobile */
+    .caution-tape-top,
+    .caution-tape {
+        padding: 3px 0;
+    }
+    .caution-tape-text {
+        font-size: 0.65rem;
+        letter-spacing: 1.5px;
+    }
+
+    /* 5. Weapons inventory - compact tags */
+    .weapon-category {
+        padding: 0.8rem 1rem;
+    }
+    .category-label {
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        margin-bottom: 0.6rem;
+        padding-bottom: 0.4rem;
+    }
+    .evidence-tags {
+        gap: 0.35rem;
+    }
+    .evidence-tag {
+        font-size: 0.65rem;
+        padding: 0.25rem 0.5rem;
+    }
+    .evidence-tag::before {
+        display: none;
+    }
+
+    /* 6. Wanted poster - more compact */
+    .wanted-border {
+        padding: 1.5rem 1rem;
+    }
+    .wanted-title {
+        font-size: 1.8rem;
+        letter-spacing: 5px;
+        margin-bottom: 0.5rem;
+    }
+    .silhouette-head.small {
+        width: 32px;
+        height: 36px;
+    }
+    .silhouette-body.small {
+        width: 52px;
+        height: 32px;
+    }
+    .wanted-name {
+        font-size: 1.3rem;
+        letter-spacing: 3px;
+    }
+    .wanted-description {
+        font-size: 0.75rem;
+        margin-bottom: 0.6rem;
+    }
+    .wanted-divider {
+        margin: 0.8rem auto;
+    }
+    .tip-intro {
+        font-size: 0.8rem;
+        margin-bottom: 0.8rem;
+    }
+
+    /* 7. Scroll-to-top button */
+    .scroll-top-btn {
+        position: fixed;
+        bottom: 24px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: #f5c518;
+        color: #000;
+        border: none;
+        font-size: 1.2rem;
+        font-weight: 700;
+        cursor: pointer;
+        z-index: 998;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        pointer-events: none;
+    }
+    .scroll-top-btn.visible {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
+    .scroll-top-btn:active {
+        transform: scale(0.9);
+    }
+}
+
+/* Hide mobile-only elements on desktop */
+@media (min-width: 811px) {
+    .mobile-mini-header,
+    .scroll-top-btn,
+    .carousel-dots,
+    .inner-carousel-dots {
+        display: none !important;
+    }
+}
+
 /* === Touch target minimum sizes === */
 @media (hover: none) and (pointer: coarse) {
     .channel-link {
