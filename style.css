@@ -1471,9 +1471,28 @@ a:hover {
     }
 
     .section-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.8rem;
+        position: relative;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1rem;
+    }
+    .section-header .classified-stamp,
+    .section-header .top-secret-stamp {
+        position: absolute;
+        right: -8px;
+        top: 50%;
+        transform: translate(0, -50%) rotate(-8deg) scale(0.7);
+        opacity: 0;
+    }
+    .section-header .classified-stamp.stamp-animate,
+    .section-header .top-secret-stamp.stamp-animate {
+        animation: stamp-in-mobile 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+    @keyframes stamp-in-mobile {
+        0% { transform: translate(0, -50%) rotate(-8deg) scale(2); opacity: 0; }
+        60% { transform: translate(0, -50%) rotate(-8deg) scale(0.65); opacity: 0.9; }
+        100% { transform: translate(0, -50%) rotate(-8deg) scale(0.7); opacity: 0.75; }
     }
 
     .stamp-header {
@@ -1684,12 +1703,22 @@ a:hover {
         border-bottom-width: 2px;
     }
 
-    .classified-stamp,
-    .top-secret-stamp {
-        font-size: 0.9rem;
-        padding: 0.15rem 0.5rem;
-        letter-spacing: 1.5px;
+    .section-header .classified-stamp,
+    .section-header .top-secret-stamp {
+        font-size: 0.75rem;
+        padding: 0.1rem 0.4rem;
+        letter-spacing: 1px;
         border-width: 2px;
+        transform: translate(0, -50%) rotate(-8deg) scale(0.6);
+    }
+    .section-header .classified-stamp.stamp-animate,
+    .section-header .top-secret-stamp.stamp-animate {
+        animation: stamp-in-mobile-sm 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+    @keyframes stamp-in-mobile-sm {
+        0% { transform: translate(0, -50%) rotate(-8deg) scale(1.8); opacity: 0; }
+        60% { transform: translate(0, -50%) rotate(-8deg) scale(0.55); opacity: 0.9; }
+        100% { transform: translate(0, -50%) rotate(-8deg) scale(0.6); opacity: 0.75; }
     }
 
     /* Mugshot */
