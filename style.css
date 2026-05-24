@@ -119,37 +119,56 @@ a:hover {
     display: flex;
     justify-content: center;
     gap: 0;
-    background: rgba(13, 13, 13, 0.9);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid #222;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 2px solid #f5c518;
     padding: 0;
 }
 
 #nav-bar a {
-    color: #888;
+    color: #666;
     text-decoration: none;
     font-family: 'Oswald', sans-serif;
-    font-size: 0.75rem;
-    letter-spacing: 1.5px;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    padding: 12px 18px;
+    padding: 14px 22px;
     transition: color 0.2s, background 0.2s;
+    position: relative;
+}
+
+#nav-bar a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: #f5c518;
+    transition: width 0.3s;
 }
 
 #nav-bar a:hover {
     color: #f5c518;
-    background: rgba(245, 197, 24, 0.05);
+}
+
+#nav-bar a:hover::after {
+    width: 60%;
 }
 
 #nav-bar a.active {
     color: #f5c518;
-    border-bottom: 2px solid #f5c518;
+}
+
+#nav-bar a.active::after {
+    width: 60%;
 }
 
 /* offset content for fixed nav */
 .section {
-    scroll-margin-top: 44px;
+    scroll-margin-top: 48px;
 }
 
 /* --- CAUTION TAPE --- */
@@ -275,9 +294,10 @@ a:hover {
 /* --- MUGSHOT SECTION --- */
 .mugshot-container {
     display: grid;
-    grid-template-columns: 350px 1fr;
+    grid-template-columns: 350px minmax(0, 1fr);
     gap: 3rem;
     align-items: start;
+    overflow: hidden;
 }
 
 .mugshot-frame {
