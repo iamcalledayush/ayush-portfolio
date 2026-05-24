@@ -63,12 +63,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     runLoadingSequence();
 
-    // --- SCROLL DIRECTION TRACKING ---
+    // --- SCROLL DIRECTION TRACKING + NAV HIDE/SHOW ---
     let lastScrollY = 0;
     let scrollingDown = true;
+    const navBar = document.getElementById('nav-bar');
     window.addEventListener('scroll', () => {
-        scrollingDown = window.scrollY > lastScrollY;
-        lastScrollY = window.scrollY;
+        const currentY = window.scrollY;
+        scrollingDown = currentY > lastScrollY;
+        if (scrollingDown && currentY > 80) {
+            navBar.classList.add('nav-hidden');
+        } else {
+            navBar.classList.remove('nav-hidden');
+        }
+        lastScrollY = currentY;
     });
 
     // --- INIT ALL ---
