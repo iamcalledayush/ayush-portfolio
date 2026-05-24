@@ -84,7 +84,36 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     initInfiniteTapes();
 
+    // --- NAV BAR ---
+    function initNavBar() {
+        const navLinks = document.querySelectorAll('#nav-bar a');
+        const sections = document.querySelectorAll('.section');
+
+        // Smooth scroll
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Highlight active section on scroll
+        const navObs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    const active = document.querySelector(`#nav-bar a[href="#${id}"]`);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { threshold: 0.2, rootMargin: '-44px 0px -50% 0px' });
+        sections.forEach(s => navObs.observe(s));
+    }
+
     function initAll() {
+        initNavBar();
         initScrollAnimations();
         initStamps();
         addTypingToHeaders();
