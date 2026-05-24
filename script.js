@@ -387,6 +387,18 @@ document.addEventListener('DOMContentLoaded', () => {
             setupCarousel(corkboard, '.exp-card', 'carousel-wrapper', 'carousel-dots');
         });
 
+        // Skills (weapons grid)
+        const weaponsGrid = document.querySelector('.weapons-grid');
+        if (weaponsGrid) {
+            setupCarousel(weaponsGrid, '.weapon-category', 'carousel-wrapper', 'carousel-dots');
+        }
+
+        // Education (dossier entries)
+        const dossierEntries = document.querySelector('.dossier-entries');
+        if (dossierEntries) {
+            setupCarousel(dossierEntries, '.dossier-entry', 'carousel-wrapper', 'carousel-dots');
+        }
+
         // Inner corkboards (impact cards inside expanded experience)
         // These need to be set up when cards open, so we use a MutationObserver
         const expCards = document.querySelectorAll('.exp-card');

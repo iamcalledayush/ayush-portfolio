@@ -30,6 +30,10 @@ body {
 }
 
 #main-content {
+    padding-top: 44px;
+}
+
+#main-content {
     width: 100%;
     min-width: 100%;
 }
@@ -2307,6 +2311,20 @@ a:hover {
     .inner-carousel-dots .dot.active {
         background: #f5c518;
         transform: scale(1.25);
+    }
+
+    /* Skills + Education carousels */
+    .weapons-grid.mobile-carousel,
+    .dossier-entries.mobile-carousel {
+        display: block;
+        overflow: visible;
+    }
+    .weapons-grid.mobile-carousel .carousel-wrapper > .weapon-category,
+    .dossier-entries.mobile-carousel .carousel-wrapper > .dossier-entry {
+        scroll-snap-align: center;
+        min-width: 85vw;
+        max-width: 85vw;
+        flex-shrink: 0;
     }
 
     /* 4. Caution tapes - thinner on mobile */
