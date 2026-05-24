@@ -1447,6 +1447,21 @@ a:hover {
 
 /* === 600px and below (large phones, small tablets) === */
 @media (max-width: 600px) {
+    #nav-bar {
+        overflow-x: auto;
+        overflow-y: hidden;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    #nav-bar::-webkit-scrollbar { display: none; }
+    #nav-bar a {
+        font-size: 0.6rem;
+        padding: 10px 14px;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+
     .section {
         padding: 2.5rem 1rem;
     }
